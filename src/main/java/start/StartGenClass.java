@@ -20,6 +20,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.unsky.coder.mysql.po.Field;
 import com.unsky.coder.mysql.po.MysqlGenConfig;
 import com.unsky.coder.mysql.po.Table;
+import com.unsky.util.UtilString;
 
 /**
  * 根据数据库自动生成entity 类型，变量名，备注，setter/getter
@@ -34,33 +35,8 @@ import com.unsky.coder.mysql.po.Table;
  * @webSite http://www.kt56.com
  */
 public class StartGenClass {
-	// 首字母转小写
-	public static String toLowerCaseFirstOne(String s) {
-		if (Character.isLowerCase(s.charAt(0)))
-			return s;
-		else
-			return (new StringBuilder()).append(Character.toLowerCase(s.charAt(0))).append(s.substring(1)).toString();
-	}
 
-	// 首字母转大写
-	public static String toUpperCaseFirstOne(String s) {
-		if (Character.isUpperCase(s.charAt(0)))
-			return s;
-		else
-			return (new StringBuilder()).append(Character.toUpperCase(s.charAt(0))).append(s.substring(1)).toString();
-	}
-
-	public static String transform(String str) {
-		while (str.contains("_")) {
-			int i = str.indexOf("_");
-			if (i + 1 < str.length()) {
-				char c = str.charAt(i + 1);
-				String temp = (c + "").toUpperCase();
-				str = str.replace("_" + c, temp);
-			}
-		}
-		return str;
-	}
+	private static ApplicationContext ac;
 
 	public static String switchJavaType(int sqlType) {
 		String typeName = "String";
@@ -86,7 +62,7 @@ public class StartGenClass {
 	public static void main(String[] args) {
 		try {
 
-			ApplicationContext ac = new ClassPathXmlApplicationContext("context.xml");
+			ac = new ClassPathXmlApplicationContext("context.xml");
 			MysqlGenConfig config = (MysqlGenConfig) ac.getBean("config");
 			Class.forName(config.getDriverClass());
 			Connection connection = DriverManager.getConnection(config.getUrl() + "&characterEncoding=utf-8",
@@ -102,7 +78,7 @@ public class StartGenClass {
 				List<Field> fields = new ArrayList<Field>();
 				while (rs.next()) {
 					String type = switchJavaType(rs.getInt("DATA_TYPE"));
-					String name = transform(rs.getString("COLUMN_NAME"));
+					String name = UtilString.transform(rs.getString("COLUMN_NAME"));
 					String comment = rs.getString("REMARKS");
 
 					content.append("\t/**\n\t *").append(comment).append("\n\t */\n");
@@ -110,12 +86,13 @@ public class StartGenClass {
 					fields.add(new com.unsky.coder.mysql.po.Field(name, type));
 				}
 				for (Field field : fields) {
-					content.append("\tpublic void set").append(toUpperCaseFirstOne(field.getName())).append("(")
-							.append(field.getType()).append(" ").append(field.getName()).append(") {\n\t\tthis.")
-							.append(field.getName()).append("=").append(field.getName()).append(";\n\t}\n");
+					content.append("\tpublic void set").append(UtilString.toUpperCaseFirstOne(field.getName()))
+							.append("(").append(field.getType()).append(" ").append(field.getName())
+							.append(") {\n\t\tthis.").append(field.getName()).append("=").append(field.getName())
+							.append(";\n\t}\n");
 
 					content.append("\tpublic ").append(field.getType()).append(" get")
-							.append(toUpperCaseFirstOne(field.getName())).append("(){\n\t\treturn this.")
+							.append(UtilString.toUpperCaseFirstOne(field.getName())).append("(){\n\t\treturn this.")
 							.append(field.getName()).append(";\n\t}\n");
 				}
 				content.append("}");
@@ -124,7 +101,7 @@ public class StartGenClass {
 				File file = new File(config.getBasePath() + packageinfo.replaceAll("\\.", "/") + "/"
 						+ table.getEntityName() + ".java");
 				BufferedWriter bWriter = new BufferedWriter(
-						new OutputStreamWriter(new FileOutputStream(file),"utf-8"));
+						new OutputStreamWriter(new FileOutputStream(file), "utf-8"));
 				bWriter.write(content.toString());
 				bWriter.close();
 			}

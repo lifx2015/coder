@@ -2,7 +2,7 @@ package com.unsky.coder.mysql.po;
 
 /**
  * 
- * ×Ö¶ÎÀà ÓÃÓÚ´æ´¢Êı¾İ¿âÖĞµÄÊı¾İÀàĞÍ
+ * å­—æ®µç±» ç”¨äºå­˜å‚¨æ•°æ®åº“ä¸­çš„æ•°æ®ç±»å‹
  * 
  * @project coder
  * @package com.unsky.coder.mysql.po
@@ -10,20 +10,20 @@ package com.unsky.coder.mysql.po;
  * @author unsky
  * @date 2016-6-29 9:40:26
  * @version 1.0
- * @copyRight É½¶«°¢ÅÁÍøÂç¼¼ÊõÓĞÏŞ¹«Ë¾
+ * @copyRight å±±ä¸œé˜¿å¸•ç½‘ç»œæŠ€æœ¯æœ‰é™å…¬å¸
  * @webSite http://www.kt56.com
  */
 public class Field {
 	/**
-	 * ×Ö¶ÎÃû
+	 * å­—æ®µå
 	 */
 	private String name;
 	/**
-	 * ÀàĞÍ
+	 * ç±»å‹
 	 */
 	private String type;
 	/**
-	 *  ±¸×¢
+	 *  å¤‡æ³¨
 	 */
 	private String commment;
 	
