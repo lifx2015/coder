@@ -21,24 +21,20 @@
 
 	<bean id="config" class="com.unsky.coder.mysql.po.MysqlGenConfig">
 		<property name="driverClass" value="com.mysql.jdbc.Driver"></property>
-		<property name="url" ><value>jdbc:mysql://192.168.216.100:3306/kuaiche_test?useUnicode=true</value> </property>
+		<property name="url" ><value>jdbc:mysql://192.168.31.100:3306/yuntong_test?useUnicode=true</value> </property>
+		
 		<property name="user" value="root"></property>
 		<property name="pwd" value="123456"></property>
-		<property name="basePath" value="E:/li/workspace/coder/src/main/java/"></property>
-		<property name="packageInfo" value="com.unsky.coder.mysql"></property>
+		<property name="basePath" value="E:/unsky/kuaiche/src/main/java/"></property>
+		<property name="allTable"><value>true</value></property>
+		<property name="packageInfo" value="com.apa.biz.po"></property>
+		<property name="autoimport" value="javax.persistence.Entity,javax.persistence.Table"></property>
+		<property name="databaseName" value="yuntong_test"></property>
 		<property name="tables">
 			<util:list list-class="java.util.ArrayList">
 				<bean class="com.unsky.coder.mysql.po.Table">
-					<property name="tableName" value="tb_banner"></property>
-					<property name="entityName" value="BannerEntity"></property>
-				</bean>
-				<bean class="com.unsky.coder.mysql.po.Table">
-					<property name="tableName" value="tb_branch"></property>
-					<property name="entityName" value="BranchEntity"></property>
-				</bean>
-				<bean class="com.unsky.coder.mysql.po.Table">
-					<property name="tableName" value="tb_branch_area"></property>
-					<property name="entityName" value="BranchAreaEntity"></property>
+					<property name="tableName" value="tb_common_config"></property>
+					<property name="entityName" value="BookEntity"></property>
 				</bean>
 			</util:list>
 

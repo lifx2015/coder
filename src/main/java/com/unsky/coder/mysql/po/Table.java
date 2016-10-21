@@ -3,6 +3,7 @@ package com.unsky.coder.mysql.po;
 public class Table {
 	private String tableName;
 	private String entityName;
+	private String remark;
 
 	public String getTableName() {
 		return tableName;
@@ -18,6 +19,14 @@ public class Table {
 
 	public void setEntityName(String entityName) {
 		this.entityName = entityName;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 
 }
