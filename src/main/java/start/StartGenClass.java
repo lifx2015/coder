@@ -111,6 +111,8 @@ public class StartGenClass {
 				StringBuffer content = new StringBuffer("/** \n\t").append(table.getRemark()).append("\n*/\n");
 				content.append("@Entity\n@Table(name = \""+table.getTableName()+"\")\n");
 				content.append("public class " + table.getEntityName() + " extends IdEntity {\n");
+				content.append("\tprivate static final long serialVersionUID = 1L;\n");
+				
 				List<Field> fields = new ArrayList<Field>();
 				boolean isDateImp=false;
 				while (rs.next()) {

@@ -21,20 +21,21 @@
 
 	<bean id="config" class="com.unsky.coder.mysql.po.MysqlGenConfig">
 		<property name="driverClass" value="com.mysql.jdbc.Driver"></property>
-		<property name="url" ><value>jdbc:mysql://192.168.31.100:3306/yuntong_test?useUnicode=true</value> </property>
+		<property name="url" ><value>jdbc:mysql://192.168.31.100:3306/cce_test?useUnicode=true</value> </property>
 		
 		<property name="user" value="root"></property>
 		<property name="pwd" value="123456"></property>
-		<property name="basePath" value="E:/unsky/kuaiche/src/main/java/"></property>
-		<property name="allTable"><value>true</value></property>
-		<property name="packageInfo" value="com.apa.biz.po"></property>
-		<property name="autoimport" value="javax.persistence.Entity,javax.persistence.Table"></property>
-		<property name="databaseName" value="yuntong_test"></property>
+		<property name="basePath" value="E:/unsky/"></property>
+		<property name="allTable"><value>false</value></property> 
+		<property name="packageInfo" value="com.apa.biz.entity"></property>
+		<property name="autoimport" value="javax.persistence.Entity,javax.persistence.Table,com.apa.biz.common.Constants,com.apa.framework.core.utils.UUIDUtil"></property>
+		<property name="databaseName" value="cce_test"></property>
 		<property name="tables">
 			<util:list list-class="java.util.ArrayList">
 				<bean class="com.unsky.coder.mysql.po.Table">
-					<property name="tableName" value="tb_common_config"></property>
-					<property name="entityName" value="BookEntity"></property>
+					<property name="tableName" value="tb_route_pass"></property>
+					<property name="entityName" value="RoutePassEntity"></property>
+					<property name="remark" value="路线经由点"></property>
 				</bean>
 			</util:list>
 
